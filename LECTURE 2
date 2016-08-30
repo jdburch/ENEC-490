@@ -1,0 +1,10 @@
+[NUM WORD COMBINED] = xlsread('ENEC490DATAS2.xls') %used this to try to find the data when I placed it into the mat lab folder to import 
+this just prodcued a table of random things 
+[type,sheetname] = xlsfinfo('ENEC490DATAS2.xls');
+m=size(sheetname,3); 
+alldata =cell(1, m);
+for i=(1:1:m);
+Sheet = char(sheetname(1,i)) ;
+alldata{i} = xlsread('ENEC 490 DATA.xls', Sheet, 'A3:C365');
+data_matrix=cell2mat(alldata);
+end %tried a loop from the internet and it also came back with an error 
