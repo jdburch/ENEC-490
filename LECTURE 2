@@ -1,10 +1,26 @@
-[NUM WORD COMBINED] = xlsread('ENEC490DATAS2.xls') %used this to try to find the data when I placed it into the mat lab folder to import 
-this just prodcued a table of random things 
-[type,sheetname] = xlsfinfo('ENEC490DATAS2.xls');
-m=size(sheetname,3); 
-alldata =cell(1, m);
-for i=(1:1:m);
-Sheet = char(sheetname(1,i)) ;
-alldata{i} = xlsread('ENEC 490 DATA.xls', Sheet, 'A3:C365');
-data_matrix=cell2mat(alldata);
-end %tried a loop from the internet and it also came back with an error 
+%set up your excel file to be two columns only-- dates and prices. Then delete the months for 1986 and 2016 since there are missing data. 
+
+data = xlsread('ENEC490DATAS2.xls') %used this to try to find the data when I placed it into the mat lab folder to import 
+
+%just take the price data
+prices = data(:,1); 
+
+
+years = length(prices)/12;
+
+%convert to a matrix
+matrix = zeros(years,12);
+
+for i=1:years
+  for j = 1:12
+  
+  matrix(i,j) = prices((i-1)*12+j);
+  
+  end
+end
+
+for i=1:12
+monthly_averages(i) = mean(matrix(:,i));
+end
+
+xlswrite("monthly_average_price.xlsx",monthly_averages);
