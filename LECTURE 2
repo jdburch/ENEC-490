@@ -1,10 +1,14 @@
-[NUM WORD COMBINED] = xlsread('ENEC490DATAS2.xls') %used this to try to find the data when I placed it into the mat lab folder to import 
-this just prodcued a table of random things 
-[type,sheetname] = xlsfinfo('ENEC490DATAS2.xls');
-m=size(sheetname,3); 
-alldata =cell(1, m);
-for i=(1:1:m);
-Sheet = char(sheetname(1,i)) ;
-alldata{i} = xlsread('ENEC 490 DATA.xls', Sheet, 'A3:C365');
-data_matrix=cell2mat(alldata);
-end %tried a loop from the internet and it also came back with an error 
+data = xlsread('ENEC490DATAedited.xls')
+price = data(:,1);
+year = length(price)/12;
+matrix = zeroes(year,12);
+for i= 1:year
+    for j=1:12
+        matrix(i,j)=price((i-1)*12+j))
+    end
+end
+for i=1:12
+    monthly_averages(i) = mean(matrix(:,i));
+end
+xlswrite('monthly_average_price.xlsx',monthly_averages);
+
