@@ -24,3 +24,19 @@ monthly_averages(i) = mean(matrix(:,i));
 end
 
 xlswrite("monthly_average_price.xlsx",monthly_averages);
+
+data = xlsread('ENEC490DATAedited.xls')
+price = data(:,1);
+year = length(price)/12;
+matrix = zeroes(year,12);
+for i= 1:year
+    for j=1:12
+        matrix(i,j)=price((i-1)*12+j))
+    end
+end
+for i=1:12
+    monthly_averages(i) = mean(matrix(:,i));
+end
+xlswrite('monthly_average_price.xlsx',monthly_averages); %what my code looks like now, the same as yours and it works, Thanks!
+
+
