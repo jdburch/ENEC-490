@@ -1,5 +1,5 @@
-function [matrix] = annualprofile(data)
-data = xlsread('1997.xls')
+function [matrixB] = annualprofile(data)
+data = xlsread('1997.xls');
 n=length(data)/12;
 matrix = zeros(12,n);
 point = 1;
@@ -10,4 +10,7 @@ for i = 1:19
     end
 end 
 
-%need to edit data so only last 8 years appear 
+dimensions = size(matrix);
+columns = dimensions(2);
+number = columns-6;
+matrixB = matrix(:,number:columns);
