@@ -1,0 +1,13 @@
+function [matrix] = annualprofile(data)
+data = xlsread('1997.xls')
+n=length(data)/12;
+matrix = zeros(12,n);
+point = 1;
+for i = 1:19 
+    for j=1:12 
+        matrix(j,i) = data(point);
+        point = point+1; % stuck on how to move one point to the right each time 
+    end
+end 
+
+%need to edit data so only last 8 years appear 
